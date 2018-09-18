@@ -1,15 +1,52 @@
+spring.application.name: api-gateway
+
 server:
   port: 8080
-
+  
 zuul:
+  ignoredServices: "*"
   routes:
     auth-center:
       path: /login/**
-      url: http://127.0.0.1:8081/
+      #url: http://127.0.0.1:8081/
       sensitiveHeaders: Cookie,Set-Cookie
-      stripPrefix: false
+      serviceId: auth-center
+      stripPrefix: false # Not Sure why this is need, but it's necessary
+      
     backend-service:
       path: /backend/**
-      url: http://127.0.0.1:8082/
+      #url: http://127.0.0.1:8082/
+      serviceId: backend-service
+
+      
+zuul.debug.request: true
+
+debug: true
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          netflix: trace
+      
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+  eureka:
+    enabled: true
+    
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: routes,filters,trace
 
 shuaicj.security.jwt.secret: otherpeopledontknowit

@@ -44,10 +44,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .addFilterAfter(new JwtTokenAuthenticationFilter(config),
                             UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                    .antMatchers(config.getUrl()).permitAll()
+                    .antMatchers("/login").permitAll()
                     .antMatchers("/backend/admin").hasRole("ADMIN")
                     .antMatchers("/backend/user").hasRole("USER")
                     .antMatchers("/backend/guest").permitAll();
+                	//.anyRequest().permitAll();
     }
 }
 
