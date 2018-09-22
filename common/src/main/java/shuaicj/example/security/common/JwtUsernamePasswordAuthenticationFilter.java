@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.Getter;
-import lombok.Setter;
+import shuaicj.example.security.model.User;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -64,9 +64,4 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
         rsp.addHeader(config.getHeader(), config.getPrefix() + " " + token);
     }
 
-    @Getter
-    @Setter
-    private static class User {
-        private String username, password;
-    }
 }

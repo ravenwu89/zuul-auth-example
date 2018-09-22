@@ -2,7 +2,9 @@ package shuaicj.example.security.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * Spring boot app.
@@ -11,6 +13,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableJpaRepositories("shuaicj.example.security.persistent")
+@EntityScan("shuaicj.example.security.model")
 public class Application {
 
     public static void main(String[] args) {
